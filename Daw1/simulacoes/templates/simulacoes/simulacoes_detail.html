@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+<script>
+{% block jquery %}
+
+// var ValorSeguro = $(".variation_select option:selected").attr("data-ValorSeguro")
+// $("#ValorSeguro").text(ValorSeguro);
+
+	$(".variation_select").change(function(){
+		var ValorSeguro = $(".variation_select option:selected").attr("data-ValorSeguro")
+		$("#ValorSeguro").text(ValorSeguro + " €");
+})
+
+{% endblock %}
+</script>
+
+
+
+
+{% block content %}
+<div class='container'>
+<div class='row'>
+
+<div class='col-sm-8'>
+<h2>{{ object.Nome }}</h2>
+
+{% if object.simulationimage_set.count > 0 %}
+
+<div>
+{% for img in object.simulationimage_set.all %}	
+
+
+
+<img class ='img-responsive' src='{{ img.image.url }}' />
+
+{% endfor %}
+
+</div>
+{% endif %}
+</div>
+
+<div class='col-sm-4'>
+
+<h4> Seleccione o tipo de seguro que pretende e o valor do seu aparelho:<h4>
+{% if object.variation_set.count > 1 %}
+<form id='add-form' method='GET' action="{% url 'cart' %}">	
+	<select name='simulacoes' class='form-control variation_select'>
+	{% for vari_obj in object.variation_set.all %}
+	<option data-ValorSeguro="{{ vari_obj.ValorSeguro }}" value="{{ vari_obj.id }}">{{ vari_obj }}</option>
+	{% endfor %}
+	</select>
+	<h3 id='ValorSeguro'>{{ object.ValorSeguro }} &euro;</h3>
+	{% endif %}
+	</br>
+	<input id='submit-btn' type='submit' value='Add to Cart' class='btn btn-primary' />
+</form>
+<br/>
+<hr/>
+<p>
+Share<br/>
+<a href="https://www.facebook.com/sharer/sharer.php?u=https://www.facebook.com/francisco.baiao.73">
+<i class="fa fa-facebook-square fa-3x"></i>
+</a>
+</div>
+</div>
+</div>
+
+{% endblock %}

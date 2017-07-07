@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+
+{% block jumbo %}
+<div class='row'>
+<div class='col-sm-6 col-sm-offset-3'>
+<h1>Registe-se já </h1>
+<form method="post" action="{% url 'registration_register' %}?next=/" >
+  {% csrf_token %}
+  {{ form|crispy }}
+
+  
+  <input class='btn btn-block btn-primary' type="submit" value="{% trans 'Registar' %}" />
+  <input type="hidden" name="next" value="{{ next }}" />
+</form>
+</div>
+</div>
+
+<hr/>
+<div class='row'>
+<div class='col-sm-6 col-sm-offset-3 text-align-center'>
+<p>Precisa de fazer <a href="{% url 'auth_login' %}">Login</a>?</p>
+</div>
+</div>
+
+{% endblock %}

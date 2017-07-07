@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+
+
+{% block jumbo %}
+
+<!-- {{ object }}
+
+{{ object.simulacoes.all }}
+ -->
+{% if object.cartsimulation_set.count < 1%}
+
+<div class='col-sn-6 col-sm-offset=3 text-center' >
+<h1>Your cart is empty</h1>
+</div>
+{% else %}
+<table class='table'>
+
+{% for simulacoes in object.cartsimulation_set.all %}
+
+
+<tr id='item-{{ item.id }}'>
+
+<td>{{ simulacoes.simulacoes.get_Nome }}</td>
+
+
+<td><form action="." method="GET" ><input type='hidden' name='simulacoes' value='{{ simulacoes.simulacoes.id }}' /><input type='number' name='qty' value='{{ simulacoes.quantity }}' /><input type='submit' class='btn btn-link' value='Actualizar' /></form></td>
+<td>{{ simulacoes.line_simulacoes_total }} &euro;</td> 
+<td class='text-right' ><a href='{{ simulacoes.remove }}'>X</a>
+
+
+
+</td>
+
+
+</tr>
+
+{% endfor %}
+<script>
+function myFunction() {
+    // alert("A sua compra foi efectuada com sucesso. Obrigado pela sua compra e pela escolha dos nossos serviços!");
+}
+</script>
+
+<tr>
+<td colspan='4' class='text-right'>Subtotal: {{ object.subtotal }} &euro; <p><hr/><a onclick="myFunction()" class="text-right btn btn-primary" href="{% url 'checkout' %}" role="button">Checkout  &raquo;</a></p><br/></td>
+
+
+</tr>
+
+
+</table>
+
+{% endif %}
+
+
+{% endblock %}

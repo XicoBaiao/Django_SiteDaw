@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+{% if not user_can_continue  %}
+<div class='col-sm-6'>
+<p class='lead'>Continuar como visitante</p>
+</div>
+<div class='col-sm-6'>
+<p class='lead'>Faça o login para continuar</p>
+<form method='POST' action="{% url 'auth_login' %}"> {% csrf_token %}
+{{ login_form|crispy }}
+
+
+<input type='hidden' name='next' value='{{ next_url }}' />
+<input type='submit' class='btn btn-sucess' value='Login' />
+</form>
+<p class='text-center'>
+
+<p>{% trans "Esqueceu-se da password" %}? <a href="{% url 'auth_password_reset' %}">{% trans "Recuperar" %}</a>!</p>
+<p>{% trans "Ainda não é membro" %}? <a href="{% url 'registration_register' %}">{% trans "Registo" %}</a>!</p>
+</p>
+</div>
+{% else %}
+
+<div class='col-md-offset-1'>
+	<h4 class='text-center'>Obrigado pela sua compra e pela escolha dos nossos serviços !<h4>
+</div>
+{% endif %}
+
+{% endblock %}

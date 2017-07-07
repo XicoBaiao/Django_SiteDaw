@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+
+
+{% block content %}
+
+<div class='row'>
+<div class='col-sm-6 col-sm-offset-3'> 
+<h1 class='col-sm-offset-2'> Contacte-nos </h1>
+<form method='POST' action=''>{% csrf_token %}
+{{ form|crispy }}
+<script>
+function myFunction() {
+    alert("A sua mensagem foi enviada com sucesso. Entraremos em contacto consigo o mais rapidamente possível. Obrigado e Boas Festas!");
+}
+</script>
+<input onclick="myFunction()" class='btn btn-primary'  type='submit' value='Submeter' />
+
+
+</form>
+</div>
+</div>
+
+{% endblock %}

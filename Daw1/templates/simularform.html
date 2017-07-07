@@ -1,0 +1,22 @@
+{% extends "simulation.html" %}
+{% load crispy_forms_tags %}
+
+
+
+{% block content %}
+
+<div class='row'>
+<div class='col-sm-6 col-sm-offset-3'> 
+<h1 class='col-sm-offset-2'> Simulação  </h1>
+<form method='POST' action=''>{% csrf_token %}
+{{ form|crispy }}
+
+<!-- <input class='btn btn-primary' type='submit' value='Simular' href="{% url 'simulacoes' %}"/> -->
+
+ <p><a class="btn btn-primary" href="{% url 'simulacoes' %}" role="button">Simule já ! &raquo;</a></p>
+
+</form>
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,76 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>{% block head_title %}Insurance4all{% endblock %} </title>
+
+    {% include 'head_css.html' %}   
+
+    <!-- Custom styles for this template -->
+    <!-- <link href="carousel.css" rel="stylesheet"> -->
+    <link href="{% static 'css/carousel.css' %}" rel="stylesheet">
+    <script>
+    // Load this when the DOM is ready
+    $(function(){
+    // You used .myCarousel here. 
+    // That's the class selector not the id selector,
+    // which is #myCarousel
+    $('#myCarousel').carousel();
+    });
+  </script>
+  </head>
+<!-- NAVBAR
+================================================== -->
+  <body>
+  {% include 'navbar.html' %}
+    
+  {% if messages %}
+  <div class='container'>
+  <div class='alert alert-sucess text-center'>
+    {% for message in messages %}
+    <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+    {% endfor %}
+</ul>
+{% endif %}
+    
+    {% block carousel %}
+    {% endblock %}
+    
+
+    <!-- Marketing messaging and featurettes
+    ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+    <div class = 'container'>
+    {% block jumbo %}
+    {% endblock %}
+    </div>
+    
+
+    {% block content %}
+    {% endblock %}
+    
+
+    {% include "javascript.html" %}
+    
+    <script>
+    $(document).ready(function(){
+        {% block jquery %}
+        {% endblock %}
+
+    });
+
+    </script>
+
+
+  </body>
+</html>
